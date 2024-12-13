@@ -1,1 +1,9 @@
 # Projet_R303
+
+Couleurs des pages :
+#CD4631
+#F0F3F5
+#F1D302
+#197BBD
+#020100
+#474448

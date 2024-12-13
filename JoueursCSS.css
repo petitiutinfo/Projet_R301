@@ -1,0 +1,91 @@
+/* JoueursCSS.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F3F5;
+    margin: 0;
+    padding: 0;
+}
+
+#hautDePage {
+    background-color: #197BBD;
+    color: #F0F3F5;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+#menu li {
+    display: inline;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#menu a:hover {
+    background-color: #474448;
+}
+
+#titrePageAccueil {
+    color: #020100;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#formulaireAjoutJoueur {
+    background-color: #FFFFFF;
+    border: 1px solid #197BBD;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.labelFormJoueur {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #020100;
+}
+
+input, select, #bontonAjoutJoueur {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #474448;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#bontonAjoutJoueur {
+    background-color: #F1D302;
+    color: #020100;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #197BBD;
+    color: #F0F3F5;
+}
