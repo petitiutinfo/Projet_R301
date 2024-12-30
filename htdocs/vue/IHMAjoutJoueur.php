@@ -2,22 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Page joueurs">
+    <meta name="description" content="Page ajout joueurs">
     <meta name="author" content="Miegemolle">
     <title>Joueurs</title>
     <!-- Fichier CSS -->
      <!-- http://localhost/PROJET_PHP/htdocs/vue/IHMAjoutJoueur.html -->
     <link rel="stylesheet" href="JoueursCSS.css">
 </head>
-<header id="hautDePage">
-    <nav id="navigation">
-        <ul id="menu">
-            <li><a href="#section1">Joueurs</a></li>
-            <li><a href="#section2">Matchs</a></li>
-            <li><a href="#section3">Statistiques</a></li>
-        </ul>
-    </nav>
-</header>
+<?php include('menu.php'); ?>
 <body>
     <h1 id="titrePageAccueil">Page d'ajout de joueur</h1>
 
