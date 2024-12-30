@@ -34,7 +34,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <meta name="description" content="Détails du joueur">
     <meta name="author" content="Enzo">
     <title>Détail du Joueur</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="JoueursCSS.css">
     <?php include('Menu.php'); ?>
 </head>
 <body>

@@ -68,5 +68,7 @@ error_reporting(E_ALL);
             <?php endforeach; ?>
         </tbody>
     </table>
+<a href="IHMAjoutJoueur.php">
+<button>Ajouter</button>
 </body>
 </html>

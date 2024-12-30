@@ -1,3 +1,7 @@
+<?php
+// Inclure la connexion à la base de données
+include('../controleur/db_connexion.php');?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,7 +13,7 @@
      <!-- http://localhost/PROJET_PHP/htdocs/vue/IHMAjoutJoueur.html -->
     <link rel="stylesheet" href="JoueursCSS.css">
 </head>
-<?php include('menu.php'); ?>
+<?php include('Menu.php'); ?>
 <body>
     <h1 id="titrePageAccueil">Page d'ajout de joueur</h1>
 
