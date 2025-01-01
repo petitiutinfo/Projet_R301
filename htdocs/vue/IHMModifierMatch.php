@@ -42,7 +42,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <h1 id="titrePageAccueil">Page de modification de match</h1>
 
     <!-- Formulaire prérempli avec les données existantes -->
-    <form id="formulaireModifierMatch" action="/modifier_match.php" method="POST">
+    <form id="formulaireModifierMatch" action="../controleur/ControleurModifierMatch.php" method="POST">
         <!-- Champ caché pour envoyer l'ID du match -->
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($match['IdMatch']); ?>">
 

@@ -42,7 +42,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <h1 id="titrePageAccueil">Page de modification de joueur</h1>
 
     <!-- Formulaire prérempli avec les données existantes -->
-    <form id="formulaireModifierJoueur" action="/modifier_joueur.php" method="POST">
+    <form id="formulaireModifierJoueur" action="../controleur/ControleurModifierJoueur.php" method="POST">
         <!-- Champ caché pour envoyer l'ID du joueur -->
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($joueur['IdJoueur']); ?>">
 

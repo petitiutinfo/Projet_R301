@@ -89,3 +89,76 @@ button:hover {
     background-color: #197BBD;
     color: #F0F3F5;
 }
+
+.header-joueur {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.header-joueur h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.header-joueur p {
+    font-size: 1.2rem;
+    margin: 5px 0 0;
+}
+
+.details-joueur {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.details-joueur section {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.details-joueur h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.details-joueur ul {
+    list-style: none;
+    padding: 0;
+}
+
+.details-joueur li {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.footer-joueur {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.footer-joueur .btn-retour,
+.footer-joueur .btn-modifier {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.footer-joueur .btn-retour:hover,
+.footer-joueur .btn-modifier:hover {
+    background-color: #0056b3;
+}
