@@ -73,10 +73,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <div class="form-group">
             <label for="statut">Statut :</label>
             <select id="statut" name="statut" required>
-                <option value="actif" <?php echo ($joueur['Statut'] == 'actif') ? 'selected' : ''; ?>>Actif</option>
-                <option value="blessé" <?php echo ($joueur['Statut'] == 'blessé') ? 'selected' : ''; ?>>Blessé</option>
-                <option value="suspendu" <?php echo ($joueur['Statut'] == 'suspendu') ? 'selected' : ''; ?>>Suspendu</option>
-                <option value="absent" <?php echo ($joueur['Statut'] == 'absent') ? 'selected' : ''; ?>>Absent</option>
+                <option value="actif" <?= ($joueur['Statut'] == 0) ? 'selected' : ''; ?>>Actif</option>
+                <option value="blessé" <?= ($joueur['Statut'] == 1) ? 'selected' : ''; ?>>Blessé</option>
+                <option value="suspendu" <?= ($joueur['Statut'] == 2) ? 'selected' : ''; ?>>Suspendu</option>
+                <option value="absent" <?= ($joueur['Statut'] == 3) ? 'selected' : ''; ?>>Absent</option>
             </select>
         </div>
         <button id="bontonModificationJoueur" type="submit">Confirmer les modifications</button>

@@ -11,7 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_naissance = $_POST['date_naissance'];
     $taille = $_POST['taille'];
     $poids = $_POST['poids'];
-    $statut = $_POST['statut'];
+
+    // Associer le statut texte à sa valeur numérique
+    $statut_mapping = [
+        'actif' => 0,
+        'blessé' => 1,
+        'suspendu' => 2,
+        'absent' => 3
+    ];
+    $statut = $statut_mapping[$_POST['statut']] ?? 0; // Par défaut, "actif"
 
     try {
         // Préparer et exécuter la requête de mise à jour
@@ -35,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id' => $id
         ]);
 
-        echo "Les informations du joueur ont été mises à jour avec succès.";
+        header("Location: ../vue/IHMJoueurs.php");
+        exit(); // Assure-toi que le script s'arrête après la redirection
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour des informations : " . $e->getMessage();
     }

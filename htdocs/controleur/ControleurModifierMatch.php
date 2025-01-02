@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id' => $id
         ]);
 
-        echo "Les informations du match ont été mises à jour avec succès.";
+        header("Location: ../vue/IHMMatchs.php");
+        exit(); // Assure-toi que le script s'arrête après la redirection
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour des informations : " . $e->getMessage();
     }

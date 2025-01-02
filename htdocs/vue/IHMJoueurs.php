@@ -17,6 +17,13 @@ try {
     echo "Erreur lors de la récupération des joueurs : " . $e->getMessage();
 }
 
+$statut_mapping = [
+    0 => 'Actif',
+    1 => 'Blessé',
+    2 => 'Suspendu',
+    3 => 'Absent'
+];
+
 // Activer l'affichage des erreurs
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -61,7 +68,7 @@ error_reporting(E_ALL);
                     <td><?= htmlspecialchars($joueur['Date_de_naissance']); ?></td>
                     <td><?= htmlspecialchars($joueur['Taille']); ?></td>
                     <td><?= htmlspecialchars($joueur['Poids']); ?></td>
-                    <td><?= htmlspecialchars($joueur['Statut']); ?></td>
+                    <td><?= htmlspecialchars($statut_mapping[$joueur['Statut']] ?? 'Inconnu'); ?></td>
                     <td><?= htmlspecialchars($joueur['A_Participé']); ?></td>
                     <td>
                         <a href="IHMDetailsJoueur.php?id=<?= $joueur['IdJoueur']; ?>">
