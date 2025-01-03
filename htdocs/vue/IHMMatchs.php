@@ -72,7 +72,11 @@ error_reporting(E_ALL);
                                 <input type="hidden" name="IdMatch" value="<?= $match['IdMatch']; ?>">
                                 <button type="submit" class="delete-button">Supprimer</button>
                             </form>
-                        <?php endif; ?>
+                            <?php else : ?>
+                                <a href="IHMModifierResultatMatch.php?id=<?= $match['IdMatch']; ?>">
+                                    <button>Modifier Résultat</button>
+                                </a>
+                            <?php endif; ?>
                     </td>
                     <td>
                     <?php if ($estDansLeFutur): ?>
