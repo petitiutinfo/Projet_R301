@@ -8,6 +8,15 @@ try {
     // Récupérer les données depuis la table `Matchs`
     $stmt = $pdo->query("SELECT * FROM Matchs");
     $Matchs = $stmt->fetchAll(PDO::FETCH_ASSOC); // Récupère les données sous forme de tableau associatif
+
+    
+    foreach ($Matchs as $index => $match) { // Utiliser une référence pour modifier directement l'élément
+        foreach ($match as $key => $value) {
+            if (is_null($value)) {
+                $Matchs[$index][$key] = ""; // Remplacer NULL par une chaîne vide
+            }
+        }
+    }
 } catch (PDOException $e) {
     echo "Erreur lors de la récupération des matchs : " . $e->getMessage();
 }
@@ -58,7 +67,7 @@ error_reporting(E_ALL);
                     <td><?= htmlspecialchars($match['Heure_Match']); ?></td>
                     <td><?= htmlspecialchars($match['Equipe_Adverse']); ?></td>
                     <td><?= htmlspecialchars($match['Lieu_Match']); ?></td>
-                    <td><?= htmlspecialchars($match['Domicile'] ? 'Domicile' : 'Extérieur'); ?></td>
+                    <td><?= htmlspecialchars($match['Domicile'] ? 'Extérieur' : 'Domicile'); ?></td>
                     <td><?= htmlspecialchars($match['Resultat']); ?></td>
                     <td>
                         <a href="IHMDetailsMatch.php?id=<?= $match['IdMatch']; ?>">

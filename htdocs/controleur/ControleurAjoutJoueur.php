@@ -11,19 +11,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $poids = $_POST['poids'];
     $statut = $_POST['statut'];
 
+    if ($numero_license && $nom && $prenom && $date_naissance && $taille && $poids && $statut !== null)
     try {
-        $stmt = $pdo->prepare("INSERT INTO Joueur (Numéro_de_license, Nom, Prénom, Date_de_naissance, Taille, Poids, Statut) 
-                                VALUES (:numero_license, :nom, :prenom, :date_naissance, :taille, :poids, :statut)");
-        $stmt->execute([
-            ':numero_license' => $numero_license,
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':date_naissance' => $date_naissance,
-            ':taille' => $taille,
-            ':poids' => $poids,
-            ':statut' => $statut
-        ]);
-        echo "Joueur ajouté avec succès.";
+            $stmt = $pdo->prepare("INSERT INTO Joueur (Numéro_de_license, Nom, Prénom, Date_de_naissance, Taille, Poids, Statut) 
+                                    VALUES (:numero_license, :nom, :prenom, :date_naissance, :taille, :poids, :statut)");
+            $stmt->execute([
+                ':numero_license' => $numero_license,
+                ':nom' => $nom,
+                ':prenom' => $prenom,
+                ':date_naissance' => $date_naissance,
+                ':taille' => $taille,
+                ':poids' => $poids,
+                ':statut' => $statut
+            ]);
+
+            header('Location: ../vue/IHMJoueurs.php');
+            exit;
     } catch (PDOException $e) {
         echo "Erreur lors de l'ajout du joueur : " . $e->getMessage();
     }

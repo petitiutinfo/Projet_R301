@@ -17,7 +17,7 @@ include('../controleur/db_connexion.php');?>
 <body>
     <h1 id="titrePageAccueil">Page d'ajout de joueur</h1>
 
-    <form id="formulaireAjoutJoueur" action="/ajouter_joueur" method="POST">
+    <form id="formulaireAjoutJoueur" action="../controleur/ControleurAjoutJoueur.php" method="POST">
         <div class="form-group">
             <label for="numero_license">Numéro de License :</label>
             <input type="number" id="numero_license" name="numero_license" required>
@@ -45,10 +45,10 @@ include('../controleur/db_connexion.php');?>
         <div class="form-group">
             <label class="labelFormJoueur" for="statut">Statut :</label>
             <select id="statut" name="statut" required>
-                <option value="actif">Actif</option>
-                <option value="blessé">Blessé</option>
-                <option value="suspendu">Suspendu</option>
-                <option value="absent">Absent</option>
+                <option value="0">Actif</option>
+                <option value="1">Blessé</option>
+                <option value="2">Suspendu</option>
+                <option value="3">Absent</option>
             </select>
         </div>
         <button id="bontonAjoutJoueur"type="submit">Ajouter le Joueur</button>

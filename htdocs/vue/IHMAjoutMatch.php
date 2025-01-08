@@ -17,7 +17,7 @@ include('../controleur/db_connexion.php');?>
 <body>
     <h1 id="titrePageAccueil">Page d'ajout de match</h1>
 
-    <form id="formulaireAjoutMatch" action="/ajouter_match" method="POST">
+    <form id="formulaireAjoutMatch" action="../controleur/ControleurAjoutMatchs.php" method="POST">
         <div class="form-group">
             <label for="date">Date :</label>
             <input type="date" id="date" name="date" required>
@@ -34,9 +34,12 @@ include('../controleur/db_connexion.php');?>
             <label class="labelFormJoueur" for="Lieu">Lieu :</label>
             <input type="varchar " id="Lieu" name="Lieu" maxlength="50" required>
         </div>
-        <div class="form-group">
-            <label class="labelFormJoueur" for="Domicile">Domicile ou exterieur :</label>
-            <input type="boolean" id="Domicile" name="Domicile" required>
+        <div>
+            <label class="labelFormJoueur" for="Domicile">Lieu du match :</label>
+            <select id="Domicile" name="Domicile" required>
+                <option value="0">Domicile</option>
+                <option value="1">Extérieur</option>
+            </select>
         </div>
         <button id="bontonAjoutMatch"type="submit">Ajouter le match</button>
     </form>

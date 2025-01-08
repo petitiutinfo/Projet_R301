@@ -7,10 +7,11 @@ $joueurs = [];
 try {
     $stmt = $pdo->query("
         SELECT j.IdJoueur, j.Numéro_de_license, j.Nom, j.Prénom, j.Date_de_naissance, j.Taille, j.Poids, j.Statut,
-               CASE WHEN p.IdJoueur IS NULL THEN 'Non' ELSE 'Oui' END AS A_Participé
+               CASE WHEN p.IdJoueur IS NULL THEN 'Non' ELSE 'Oui' END AS A_Participé, c.Commentaire
         FROM Joueur j
         LEFT JOIN Participer p ON j.IdJoueur = p.IdJoueur
-        GROUP BY j.IdJoueur, j.Numéro_de_license, j.Nom, j.Prénom, j.Date_de_naissance, j.Taille, j.Poids, j.Statut, p.IdJoueur;
+        LEFT JOIN Commentaire c ON j.IdJoueur = c.IdJoueur
+        GROUP BY j.IdJoueur, j.Numéro_de_license, j.Nom, j.Prénom, j.Date_de_naissance, j.Taille, j.Poids, j.Statut, p.IdJoueur, c.Commentaire;
     ");
     $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -43,6 +44,9 @@ error_reporting(E_ALL);
 <?php include('Menu.php'); ?>
 <body>
     <h1>Liste des Joueurs</h1>
+    <a href="IHMAjoutJoueur.php">
+        <button>Ajouter</button>
+    </a>
     <table border="1">
         <thead>
             <tr>
@@ -55,6 +59,7 @@ error_reporting(E_ALL);
                 <th>Poids</th>
                 <th>Statut</th>
                 <th>A Participé à un Match</th>
+                <th>Commentaires</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -70,12 +75,16 @@ error_reporting(E_ALL);
                     <td><?= htmlspecialchars($joueur['Poids']); ?></td>
                     <td><?= htmlspecialchars($statut_mapping[$joueur['Statut']] ?? 'Inconnu'); ?></td>
                     <td><?= htmlspecialchars($joueur['A_Participé']); ?></td>
+                    <td><?= htmlspecialchars($joueur['Commentaire'] ?? ''); ?></td>
                     <td>
                         <a href="IHMDetailsJoueur.php?id=<?= $joueur['IdJoueur']; ?>">
                             <button>Consulter</button>
                         </a>
                         <a href="IHMModifierJoueur.php?id=<?= $joueur['IdJoueur']; ?>">
                             <button>Modifier</button>
+                        </a>
+                        <a href="IHMCommentaire.php?id=<?= $joueur['IdJoueur']; ?>">
+                            <button>Commenter</button>
                         </a>
                         <?php if ($joueur['A_Participé'] === 'Non'): ?>
                             <form method="POST" action="../controleur/ControleurSuppressionJoueur.php" style="display:inline;">
@@ -88,8 +97,5 @@ error_reporting(E_ALL);
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="IHMAjoutJoueur.php">
-        <button>Ajouter</button>
-    </a>
 </body>
 </html>

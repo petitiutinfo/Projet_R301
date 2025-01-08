@@ -6,10 +6,11 @@ try {
     // Nombre total de matchs et pourcentage de résultats
     $stmt = $pdo->query("SELECT 
         COUNT(*) AS total_matchs,
-        SUM(CASE WHEN Resultat > 1 THEN 1 ELSE 0 END) AS total_gagnes,
-        SUM(CASE WHEN Resultat < 1 THEN 1 ELSE 0 END) AS total_perdus,
+        SUM(CASE WHEN Resultat > 0 THEN 1 ELSE 0 END) AS total_gagnes,
+        SUM(CASE WHEN Resultat < 0 THEN 1 ELSE 0 END) AS total_perdus,
         SUM(CASE WHEN Resultat = 0 THEN 1 ELSE 0 END) AS total_nuls
-    FROM Matchs");
+    FROM Matchs
+    WHERE Resultat IS NOT NULL");
     $resultats = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $total_matchs = $resultats['total_matchs'];
@@ -45,7 +46,8 @@ try {
     <meta name="description" content="Statistiques des matchs et joueurs">
     <meta name="author" content="Enzo">
     <title>Statistiques</title>
-    <link rel="stylesheet" href="StatistiquesCSS.css">
+    <link rel="stylesheet" href="JoueursCSS.css">
+    <?php include('Menu.php'); ?>
 </head>
 <body>
     <h1>Statistiques</h1>
