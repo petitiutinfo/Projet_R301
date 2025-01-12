@@ -1,6 +1,6 @@
 <?php
 // Inclure la connexion à la base de données
-include('../controleur/db_connexion.php');
+include('db_connexion.php');
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

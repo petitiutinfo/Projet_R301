@@ -1,34 +1,44 @@
+<?php
+session_start();
+include('controleur/db_connexion.php');
+include('controleur/ControleurConnexion.php');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    // Vérifier les identifiants via le contrôleur
+    if (verifierIdentifiants($pdo, $username, $password)) {
+        $_SESSION['authenticated'] = true; // Authentification réussie
+        header("Location: /vue/IHMJoueurs.php"); // Rediriger vers la page principale
+        exit;
+    } else {
+        $error = "Nom d'utilisateur ou mot de passe incorrect.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test InfinityFree</title>
+    <title>Authentification</title>
 </head>
 <body>
-<h1>Test de connexion à la base de données</h1>
-    <?php
-    // Inclure le fichier de connexion
-    include 'includes/db_connexion.php';
-
-    $sql = "SHOW TABLES";
-    $result = $conn->query($sql);
-
-    if (!$result) {
-        // Affiche une erreur si la requête échoue
-        die("Erreur dans la requête SQL : " . $conn->error);
-    }
-
-    if ($result->num_rows > 0) {
-        echo "<h2>Liste des tables dans la base de données :</h2>";
-        echo "<ul>";
-        while ($row = $result->fetch_array()) {
-            echo "<li>" . $row[0] . "</li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "<p>Aucune table trouvée dans la base de données.</p>";
-    }
-    ?>
+    <h1>Connexion</h1>
+    <?php if (isset($error)): ?>
+        <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
+    <form method="POST" action="">
+        <div>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Se connecter</button>
+    </form>
 </body>
 </html>

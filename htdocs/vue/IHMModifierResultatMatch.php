@@ -1,35 +1,17 @@
 <?php
 // Inclure la connexion à la base de données
 include('../controleur/db_connexion.php');
+include('../controleur/ControleurRecupererMatch.php');
+//include('../controleur/ControleurModificationResultatMatch.php');
 
 // Vérifier si l'ID du match est passé dans l'URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
 
     try {
-        // Récupérer les informations du match avec l'ID
-        $stmt = $pdo->prepare("SELECT * FROM Matchs WHERE idMatch = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $match = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        $match = recupererMatchParId($pdo, $id);
         if (!$match) {
             echo "Aucun match trouvé avec cet ID.";
-            exit;
-        }
-
-        // Vérifier si le formulaire a été soumis pour mettre à jour le résultat
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['resultat'])) {
-            $resultat = htmlspecialchars($_POST['resultat']);
-            
-            // Mettre à jour le résultat dans la base de données
-            $updateStmt = $pdo->prepare("UPDATE Matchs SET Resultat = :resultat WHERE idMatch = :id");
-            $updateStmt->bindParam(':resultat', $resultat, PDO::PARAM_STR);
-            $updateStmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $updateStmt->execute();
-
-            header('Location: IHMMatchs.php');
-            echo "Résultat mis à jour avec succès.";
             exit;
         }
     } catch (PDOException $e) {
@@ -61,35 +43,36 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <td><?php echo htmlspecialchars($match['IdMatch']); ?></td>
         </tr>
         <tr>
-            <th>Numéro de licence</th>
+            <th>Date du match</th>
             <td><?php echo htmlspecialchars($match['Date_Match']); ?></td>
         </tr>
         <tr>
-            <th>Nom</th>
+            <th>Heure du match</th>
             <td><?php echo htmlspecialchars($match['Heure_Match']); ?></td>
         </tr>
         <tr>
-            <th>Prénom</th>
+            <th>Equipe adverse</th>
             <td><?php echo htmlspecialchars($match['Equipe_Adverse']); ?></td>
         </tr>
         <tr>
-            <th>Date de naissance</th>
+            <th>Lieu du match</th>
             <td><?php echo htmlspecialchars($match['Lieu_Match']); ?></td>
         </tr>
         <tr>
-            <th>Taille</th>
+            <th>Domicile ou Exterieur</th>
             <td><?php echo htmlspecialchars($match['Domicile']); ?></td>
         </tr>
         <tr>
-            <th>Poids</th>
+            <th>Resultat</th>
             <td><?php echo htmlspecialchars($match['Resultat']); ?></td>
         </tr>
     </table>
 
     <h2>Modifier le Résultat</h2>
-    <form method="POST">
+    <form method="POST" action="../controleur/ControleurModificationResultatMatch.php" style="display:inline;">
         <label for="resultat">Nouveau Résultat:</label>
-        <input type="text" id="resultat" name="resultat" value="<?php echo htmlspecialchars($match['Resultat']); ?>" required>
+        <input type="text" id="resultat" name="resultat" required>
+        <input type="hidden" name="id" value="<?= $match['IdMatch']; ?>">
         <button type="submit">Mettre à jour</button>
     </form>
 </body>

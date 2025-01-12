@@ -2,27 +2,28 @@
 // Inclure la connexion à la base de données
 include('../controleur/db_connexion.php');
 
+// Inclure le contrôleur des joueurs
+include('../controleur/ControleurJoueurs.php');
+
 // Vérifier si l'ID du joueur est passé dans l'URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
 
     try {
-        // Récupérer les informations du joueur avec l'ID
-        $stmt = $pdo->prepare("SELECT * FROM Joueur WHERE idJoueur = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $joueur = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Récupérer les informations du joueur via le contrôleur
+        $joueur = getJoueurById($pdo, $id);
 
         if (!$joueur) {
-            echo "Aucun joueur trouvé avec cet ID.";
+            echo htmlspecialchars("Aucun joueur trouvé avec cet ID.");
             exit;
         }
-    } catch (PDOException $e) {
-        echo "Erreur lors de la récupération des informations : " . $e->getMessage();
+    } catch (Exception $e) {
+        echo htmlspecialchars("Erreur lors de la récupération des informations.");
+        error_log("Erreur : " . $e->getMessage());
         exit;
     }
 } else {
-    echo "ID du joueur non spécifié.";
+    echo htmlspecialchars("ID du joueur non spécifié.");
     exit;
 }
 ?>
@@ -41,8 +42,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     <!-- En-tête avec le nom du joueur -->
     <header class="header-joueur">
-        <h1><?php echo htmlspecialchars($joueur['Nom']) . " " . htmlspecialchars($joueur['Prénom']); ?></h1>
-        <p>#<?php echo htmlspecialchars($joueur['Numéro_de_license']); ?></p>
+        <h1><?= htmlspecialchars($joueur['Nom']) . " " . htmlspecialchars($joueur['Prénom']); ?></h1>
+        <p>#<?= htmlspecialchars($joueur['Numéro_de_license']); ?></p>
     </header>
 
     <!-- Contenu principal -->
@@ -51,28 +52,22 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <section class="colonne-gauche">
             <h2>Informations générales</h2>
             <ul>
-                <li><strong>ID :</strong> <?php echo htmlspecialchars($joueur['IdJoueur']); ?></li>
-                <li><strong>Numéro de license :</strong> <?php echo htmlspecialchars($joueur['Numéro_de_license']); ?></li>
-                <li><strong>Nom :</strong> <?php echo htmlspecialchars($joueur['Nom']); ?></li>
-                <li><strong>Prénom :</strong> <?php echo htmlspecialchars($joueur['Prénom']); ?></li>
+                <li><strong>ID :</strong> <?= htmlspecialchars($joueur['IdJoueur']); ?></li>
+                <li><strong>Numéro de license :</strong> <?= htmlspecialchars($joueur['Numéro_de_license']); ?></li>
+                <li><strong>Nom :</strong> <?= htmlspecialchars($joueur['Nom']); ?></li>
+                <li><strong>Prénom :</strong> <?= htmlspecialchars($joueur['Prénom']); ?></li>
             </ul>
         </section>
 
         <section class="colonne-droite">
             <h2>Caractéristiques</h2>
             <ul>
-                <li><strong>Date de naissance :</strong> <?php echo htmlspecialchars($joueur['Date_de_naissance']); ?></li>
-                <li><strong>Taille :</strong> <?php echo htmlspecialchars($joueur['Taille']); ?> cm</li>
-                <li><strong>Poids :</strong> <?php echo htmlspecialchars($joueur['Poids']); ?> kg</li>
-                <li><strong>Statut :</strong> <?php echo htmlspecialchars($joueur['Statut']); ?></li>
+                <li><strong>Date de naissance :</strong> <?= htmlspecialchars($joueur['Date_de_naissance']); ?></li>
+                <li><strong>Taille :</strong> <?= htmlspecialchars($joueur['Taille']); ?> cm</li>
+                <li><strong>Poids :</strong> <?= htmlspecialchars($joueur['Poids']); ?> kg</li>
+                <li><strong>Statut :</strong> <?= htmlspecialchars($joueur['Statut']); ?></li>
             </ul>
         </section>
     </main>
-
-    <!-- Optionnel : bouton de retour ou d'action -->
-    <footer class="footer-joueur">
-        <a href="/liste_joueurs.php" class="btn-retour">Retour à la liste</a>
-        <a href="/modifier_joueur.php?id=<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" class="btn-modifier">Modifier le joueur</a>
-    </footer>
 </body>
 </html>

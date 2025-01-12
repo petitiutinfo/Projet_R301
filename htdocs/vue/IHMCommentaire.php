@@ -2,35 +2,23 @@
 // Inclure la connexion à la base de données
 include('../controleur/db_connexion.php');
 
+// Inclure le contrôleur pour récupérer les données
+include('../controleur/ControleurJoueurs.php');
+
 // Vérifier si l'ID du joueur est défini et non vide
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-    // Assurer que l'ID est un entier
     $id = intval($_GET['id']);
 
     try {
-        // Récupérer les informations du joueur avec l'ID
-        $stmt = $pdo->prepare("SELECT * FROM Joueur WHERE IdJoueur = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $joueur = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Vérifier si un joueur a été trouvé
-        if (!$joueur) {
-            echo htmlspecialchars("Aucun joueur trouvé avec cet ID.");
-            exit;
-        }
+        // Récupérer les informations du joueur
+        $joueur = getJoueurById($pdo, $id);
 
         // Récupérer le commentaire existant (si disponible)
-        $stmt = $pdo->prepare("SELECT Commentaire FROM Commentaire WHERE IdJoueur = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $commentaire = $stmt->fetchColumn();
+        $commentaire = getCommentaireByJoueurId($pdo, $id);
 
-    } catch (PDOException $e) {
-        // Afficher un message d'erreur générique
+    } catch (Exception $e) {
         echo htmlspecialchars("Une erreur est survenue lors de la récupération des données.");
-        // Journaliser l'erreur pour diagnostic
-        error_log("Erreur PDO : " . $e->getMessage());
+        error_log("Erreur : " . $e->getMessage());
         exit;
     }
 
@@ -55,20 +43,20 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     
     <div>
         <h2>Informations du joueur</h2>
-        <p><strong>Nom :</strong> <?php echo htmlspecialchars($joueur['nom']); ?></p>
-        <p><strong>Prénom :</strong> <?php echo htmlspecialchars($joueur['prenom']); ?></p>
-        <p><strong>Date de naissance :</strong> <?php echo htmlspecialchars($joueur['date_naissance']); ?></p>
-        <p><strong>Taille :</strong> <?php echo htmlspecialchars($joueur['taille']); ?> cm</p>
-        <p><strong>Poids :</strong> <?php echo htmlspecialchars($joueur['poids']); ?> kg</p>
-        <p><strong>Statut :</strong> <?php echo htmlspecialchars($joueur['statut']); ?></p>
+        <p><strong>Nom :</strong> <?= htmlspecialchars($joueur['Nom']); ?></p>
+        <p><strong>Prénom :</strong> <?= htmlspecialchars($joueur['Prénom']); ?></p>
+        <p><strong>Date de naissance :</strong> <?= htmlspecialchars($joueur['Date_de_naissance']); ?></p>
+        <p><strong>Taille :</strong> <?= htmlspecialchars($joueur['Taille']); ?> cm</p>
+        <p><strong>Poids :</strong> <?= htmlspecialchars($joueur['Poids']); ?> kg</p>
+        <p><strong>Statut :</strong> <?= htmlspecialchars($joueur['Statut']); ?></p>
     </div>
 
     <form action="../controleur/ControleurCommentaires.php" method="POST">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="id" value="<?= $id; ?>">
         
         <div class="form-group">
             <label for="commentaire">Commentaires :</label>
-            <textarea id="commentaire" name="commentaire" rows="10" cols="50"><?php echo htmlspecialchars($commentaire ?? ''); ?></textarea>
+            <textarea id="commentaire" name="commentaire" rows="10" cols="50"><?= htmlspecialchars($commentaire ?? ''); ?></textarea>
         </div>
 
         <button type="submit">Valider</button>

@@ -1,6 +1,6 @@
 <?php
 // Inclure la connexion à la base de données
-include('../controleur/db_connexion.php');
+include('db_connexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire

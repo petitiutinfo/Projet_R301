@@ -1,6 +1,6 @@
 <?php
 // Inclure la connexion à la base de données
-include('../controleur/db_connexion.php');
+include('db_connexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
@@ -19,8 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                    Heure_Match = :heure,
                                    Equipe_Adverse = :equipe_adverse,
                                    Lieu_Match = :lieu,
-                                   Domicile = :domicile,
-                                   Resultat = :resultat
+                                   Domicile = :domicile
                                WHERE IdMatch = :id");
         $stmt->execute([
             ':date' => $date,
@@ -28,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':equipe_adverse' => $equipe_adverse,
             ':lieu' => $lieu,
             ':domicile' => $domicile,
-            ':resultat' => $resultat,
             ':id' => $id
         ]);
 

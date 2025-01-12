@@ -1,31 +1,5 @@
-<?php
-include('../controleur/db_connexion.php');
-
-$Matchs = [];
-
-// Requête pour récupérer les matchs
-try {
-    // Récupérer les données depuis la table `Matchs`
-    $stmt = $pdo->query("SELECT * FROM Matchs");
-    $Matchs = $stmt->fetchAll(PDO::FETCH_ASSOC); // Récupère les données sous forme de tableau associatif
-
-    
-    foreach ($Matchs as $index => $match) { // Utiliser une référence pour modifier directement l'élément
-        foreach ($match as $key => $value) {
-            if (is_null($value)) {
-                $Matchs[$index][$key] = ""; // Remplacer NULL par une chaîne vide
-            }
-        }
-    }
-} catch (PDOException $e) {
-    echo "Erreur lors de la récupération des matchs : " . $e->getMessage();
-}
-
-// Activer l'affichage des erreurs
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-?>
+<?php include('Menu.php');?>
+<?php include('../controleur/ControleurMatchs.php');?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,10 +8,8 @@ error_reporting(E_ALL);
     <meta name="description" content="Page affichage matchs">
     <meta name="author" content="Enzo">
     <title>Matchs</title>
-    <!-- Fichier CSS -->
     <link rel="stylesheet" href="JoueursCSS.css">
 </head>
-<?php include('Menu.php'); ?>
 <body>
     <h1>Liste des Matchs</h1>
     <table border="1">
@@ -55,7 +27,7 @@ error_reporting(E_ALL);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($Matchs as $match): 
+            <?php foreach ($matchs as $match): 
                 // Vérifier si la date du match est dans le futur
                 $dateDuMatch = new DateTime($match['Date_Match']);
                 $dateActuelle = new DateTime(); 
@@ -81,22 +53,23 @@ error_reporting(E_ALL);
                                 <input type="hidden" name="IdMatch" value="<?= $match['IdMatch']; ?>">
                                 <button type="submit" class="delete-button">Supprimer</button>
                             </form>
-                            <?php else : ?>
-                                <a href="IHMModifierResultatMatch.php?id=<?= $match['IdMatch']; ?>">
-                                    <button>Modifier Résultat</button>
-                                </a>
-                            <?php endif; ?>
+                        <?php else: ?>
+                            <a href="IHMModifierResultatMatch.php?id=<?= $match['IdMatch']; ?>">
+                                <button>Modifier Résultat</button>
+                            </a>
+                        <?php endif; ?>
                     </td>
                     <td>
-                    <?php if ($estDansLeFutur): ?>
-                        <a href="IHMFueilledematchAVANT.php?id=<?= $match['IdMatch']; ?>">
-                            <button>Feuille de match</button>
-                        </a>
-                    <?php else: ?>
-                        <a href="IHMFueilledematchAPRES.php?id=<?= $match['IdMatch']; ?>">
-                            <button>Feuille de match</button>
-                        </a>
-                    <?php endif; ?>
+                        <?php if ($estDansLeFutur): ?>
+                            <a href="IHMFueilledematchAVANT.php?id=<?= $match['IdMatch']; ?>">
+                                <button>Feuille de match</button>
+                            </a>
+                        <?php else: ?>
+                            <a href="IHMFueilledematchAPRES.php?id=<?= $match['IdMatch']; ?>">
+                                <button>Feuille de match</button>
+                            </a>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

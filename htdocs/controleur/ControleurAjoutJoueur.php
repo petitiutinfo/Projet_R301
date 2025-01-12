@@ -1,6 +1,6 @@
 <?php
 // Inclure la connexion à la base de données
-include('../controleur/db_connexion.php');
+include('db_connexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numero_license = $_POST['numero_license'];

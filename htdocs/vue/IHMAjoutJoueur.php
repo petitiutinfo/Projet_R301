@@ -1,5 +1,6 @@
 <?php
 // Inclure la connexion à la base de données
+//include('../controleur/auth.php');
 include('../controleur/db_connexion.php');?>
 
 <!DOCTYPE html>

@@ -1,18 +1,14 @@
 <?php
 // Inclure la connexion à la base de données
 include('../controleur/db_connexion.php');
+include('../controleur/ControleurRecupererMatch.php');
 
 // Vérifier si l'ID du match est passé dans l'URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
 
     try {
-        // Récupérer les informations du match avec l'ID
-        $stmt = $pdo->prepare("SELECT * FROM Matchs WHERE IdMatch = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $match = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        $match = recupererMatchParId($pdo, $id);
         if (!$match) {
             echo "Aucun match trouvé avec cet ID.";
             exit;
@@ -65,13 +61,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <div class="form-group">
             <label for="Domicile">Domicile ou extérieur :</label>
             <select id="Domicile" name="Domicile" required>
-                <option value="1" <?php echo ($match['Domicile'] == 1) ? 'selected' : ''; ?>>Domicile</option>
-                <option value="0" <?php echo ($match['Domicile'] == 0) ? 'selected' : ''; ?>>Extérieur</option>
+                <option value="1" <?php echo ($match['Domicile'] == 1) ? 'selected' : ''; ?>>Extérieur</option>
+                <option value="0" <?php echo ($match['Domicile'] == 0) ? 'selected' : ''; ?>>Domicile</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="resultat">Résultat :</label>
-            <input type="text" id="resultat" name="resultat" maxlength="50" value="<?php echo htmlspecialchars($match['Resultat']); ?>">
         </div>
         <button id="bontonModificationMatch" type="submit">Confirmer les modifications</button>
     </form>

@@ -1,5 +1,5 @@
 <?php
-include('connexionBD.php');
+include('db_connexion.php');
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

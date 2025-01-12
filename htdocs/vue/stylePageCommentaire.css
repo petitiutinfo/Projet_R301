@@ -1,0 +1,175 @@
+/* Code du style commun à toutes les pages */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F3F5;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #020100;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#hautDePage {
+    background-color: #197BBD;
+    color: #F0F3F5;
+    padding: 10px 0;
+    position: relative;
+}
+
+#navigation {
+    text-align: center;
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    gap: 20px;
+}
+
+#menu li {
+    margin: 0;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#menu a:hover {
+    background-color: #474448;
+}
+
+#menuLogout {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#menuLogout li {
+    margin: 0;
+}
+
+#menuLogout a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#menuLogout a:hover {
+    background-color: #474448;
+}
+
+
+
+/*--------------------------------------------*/
+/*Style de la page commentaires */
+
+
+
+
+
+div h2 {
+    color: #020100;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+div p {
+    margin: 10px 0;
+    color: #020100;
+    font-size: 16px;
+}
+
+/* Style pour centrer les informations du joueur */
+.informations-joueur {
+    background-color: #FFFFFF;
+    border: 1px solid #197BBD;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centre le texte horizontalement */
+    margin: 20px auto; /* Ajoute de l'espace autour et centre le conteneur */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet d'élévation */
+}
+
+.informations-joueur p {
+    margin: 10px 0; /* Ajoute de l'espace vertical entre les paragraphes */
+    font-size: 16px; /* Taille de la police */
+    color: #020100; /* Couleur du texte */
+}
+
+
+form {
+    background-color: #FFFFFF;
+    border: 1px solid #197BBD;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #020100;
+}
+
+
+textarea {
+    width: 80%; /* Limite la largeur du champ de texte */
+    max-width: 100%; /* Empêche le dépassement du conteneur */
+    padding: 10px; /* Ajoute de l'espace à l'intérieur du champ */
+    border: 1px solid #474448; /* Bordure autour du champ */
+    border-radius: 5px; /* Bordure arrondie */
+    font-size: 14px; /* Taille de la police */
+    margin: 0 auto; /* Centre horizontalement */
+    display: block; /* Nécessaire pour que margin auto fonctionne */
+    box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
+}
+
+button {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+    background-color: #197BBD;
+    color: #F0F3F5;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #145A8C;
+}

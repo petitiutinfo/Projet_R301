@@ -2,27 +2,28 @@
 // Inclure la connexion à la base de données
 include('../controleur/db_connexion.php');
 
-// Vérifier si l'ID du joueur est passé dans l'URL
+// Inclure le contrôleur des matchs
+include('../controleur/ControleurMatchs.php');
+
+// Vérifier si l'ID du match est passé dans l'URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
 
     try {
-        // Récupérer les informations du joueur avec l'ID
-        $stmt = $pdo->prepare("SELECT * FROM Matchs WHERE idMatch = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $match = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Récupérer les informations du match via le contrôleur
+        $match = getMatchById($pdo, $id);
 
         if (!$match) {
-            echo "Aucun joueur trouvé avec cet ID.";
+            echo htmlspecialchars("Aucun match trouvé avec cet ID.");
             exit;
         }
-    } catch (PDOException $e) {
-        echo "Erreur lors de la récupération des informations : " . $e->getMessage();
+    } catch (Exception $e) {
+        echo htmlspecialchars("Erreur lors de la récupération des informations.");
+        error_log("Erreur : " . $e->getMessage());
         exit;
     }
 } else {
-    echo "ID du joueur non spécifié.";
+    echo htmlspecialchars("ID du match non spécifié.");
     exit;
 }
 ?>
@@ -31,43 +32,44 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Détails du joueur">
+    <meta name="description" content="Détails du match">
     <meta name="author" content="Enzo">
-    <title>Détail du Joueur</title>
+    <title>Détails du Match</title>
     <link rel="stylesheet" href="JoueursCSS.css">
-    <?php include('Menu.php'); ?>
 </head>
 <body>
-    <h1>Détails du Joueur</h1>
+    <?php include('Menu.php'); ?>
+
+    <h1>Détails du Match</h1>
 
     <table>
         <tr>
             <th>ID</th>
-            <td><?php echo htmlspecialchars($match['IdMatch']); ?></td>
+            <td><?= htmlspecialchars($match['IdMatch']); ?></td>
         </tr>
         <tr>
-            <th>Numéro de license</th>
-            <td><?php echo htmlspecialchars($match['Date_Match']); ?></td>
+            <th>Date</th>
+            <td><?= htmlspecialchars($match['Date_Match']); ?></td>
         </tr>
         <tr>
-            <th>Nom</th>
-            <td><?php echo htmlspecialchars($match['Heure_Match']); ?></td>
+            <th>Heure</th>
+            <td><?= htmlspecialchars($match['Heure_Match']); ?></td>
         </tr>
         <tr>
-            <th>Prénom</th>
-            <td><?php echo htmlspecialchars($match['Equipe_Adverse']); ?></td>
+            <th>Équipe adverse</th>
+            <td><?= htmlspecialchars($match['Equipe_Adverse']); ?></td>
         </tr>
         <tr>
-            <th>Date de naissance</th>
-            <td><?php echo htmlspecialchars($match['Lieu_Match']); ?></td>
+            <th>Lieu de la rencontre</th>
+            <td><?= htmlspecialchars($match['Lieu_Match']); ?></td>
         </tr>
         <tr>
-            <th>Taille</th>
-            <td><?php echo htmlspecialchars($match['Domicile']); ?></td>
+            <th>Domicile ou extérieur</th>
+            <td><?= htmlspecialchars($match['Domicile']); ?></td>
         </tr>
         <tr>
-            <th>Poids</th>
-            <td><?php echo htmlspecialchars($match['Resultat']); ?></td>
+            <th>Résultat</th>
+            <td><?= htmlspecialchars($match['Resultat']); ?></td>
         </tr>
     </table>
 </body>

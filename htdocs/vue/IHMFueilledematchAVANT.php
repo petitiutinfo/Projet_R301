@@ -12,33 +12,21 @@ $id_match = intval($_GET['id']);
 
 // Récupérer les joueurs actifs
 try {
-    $stmt = $pdo->prepare("SELECT * FROM Joueur WHERE Statut = '0'");
+    $stmt = $pdo->prepare("
+        SELECT j.*, 
+               c.Commentaire, 
+               p.Note AS Evaluations 
+        FROM Joueur j
+        LEFT JOIN Commentaire c ON j.IdJoueur = c.IdJoueur
+        LEFT JOIN Participer p ON p.IdJoueur = j.IdJoueur AND p.IdMatch = :id_match
+        WHERE j.Statut = '0'
+    ");
+    $stmt->bindParam(':id_match', $id_match, PDO::PARAM_INT);
     $stmt->execute();
     $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Erreur lors de la récupération des joueurs actifs : " . $e->getMessage();
     exit;
-}
-
-// Récupérer les participations existantes pour ce match
-try {
-    $stmt = $pdo->prepare("
-        SELECT p.IdJoueur, p.Poste, p.Titulaire_ou_remplaçant 
-        FROM Participer p 
-        WHERE p.IdMatch = :id_match
-    ");
-    $stmt->bindParam(':id_match', $id_match, PDO::PARAM_INT);
-    $stmt->execute();
-    $participations_existantes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Erreur lors de la récupération des participations existantes : " . $e->getMessage();
-    exit;
-}
-
-// Organiser les participations par ID du joueur pour un accès facile
-$participations_par_joueur = [];
-foreach ($participations_existantes as $participation) {
-    $participations_par_joueur[$participation['IdJoueur']] = $participation;
 }
 
 // Définir le nombre minimum de joueurs requis
@@ -56,10 +44,37 @@ $nombre_minimum = 12;
     <script>
         function verifierSelection() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            if (checkboxes.length < <?php echo $nombre_minimum; ?>) {
-                alert("Vous devez sélectionner au moins <?php echo $nombre_minimum; ?> joueurs.");
+            const minimum = <?php echo $nombre_minimum; ?>;
+
+            if (checkboxes.length < minimum) {
+                alert("Vous devez sélectionner au moins " + minimum + " joueurs.");
                 return false;
             }
+
+            const postes = {};
+            const roles = {};
+
+            checkboxes.forEach((checkbox) => {
+                const idJoueur = checkbox.value;
+                const poste = document.querySelector(`[name="poste_${idJoueur}"]`).value;
+                const role = document.querySelector(`[name="role_${idJoueur}"]`).value;
+
+                postes[poste] = postes[poste] || [];
+                postes[poste].push(role);
+
+                if (!roles[poste]) {
+                    roles[poste] = { Titulaire: 0, Remplaçant: 0 };
+                }
+                roles[poste][role]++;
+            });
+
+            for (const poste in postes) {
+                if (roles[poste].Titulaire !== 1 || roles[poste].Remplaçant !== 1) {
+                    alert(`Le poste "${poste}" doit avoir exactement 1 titulaire et 1 remplaçant.`);
+                    return false;
+                }
+            }
+
             return true;
         }
     </script>
@@ -82,41 +97,37 @@ $nombre_minimum = 12;
                     <th>Taille (cm)</th>
                     <th>Poids (kg)</th>
                     <th>Commentaires</th>
-                    <th>Évaluations de l'entraîneur</th>
+                    <th>Évaluations</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($joueurs as $joueur): ?>
-                    <?php
-                        // Vérifier si le joueur a une participation existante
-                        $participation = $participations_par_joueur[$joueur['IdJoueur']] ?? null;
-                    ?>
                     <tr>
                         <td>
                             <input type="checkbox" name="joueurs[]" value="<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" 
-                                   <?php echo $participation ? 'checked' : ''; ?>>
+                                   <?php echo $joueur['Evaluations'] ? 'checked' : ''; ?>>
                         </td>
                         <td>
                             <select name="poste_<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" required>
-                                <option value="Attaquant" <?php echo ($participation['Poste'] ?? '') == 'Attaquant' ? 'selected' : ''; ?>>Attaquant</option>
-                                <option value="Centre avant" <?php echo ($participation['Poste'] ?? '') == 'Centre avant' ? 'selected' : ''; ?>>Centre avant</option>
-                                <option value="Centre arrière" <?php echo ($participation['Poste'] ?? '') == 'Centre arrière' ? 'selected' : ''; ?>>Centre arrière</option>
-                                <option value="Réceptionneur" <?php echo ($participation['Poste'] ?? '') == 'Réceptionneur' ? 'selected' : ''; ?>>Réceptionneur</option>
-                                <option value="Pointu" <?php echo ($participation['Poste'] ?? '') == 'Pointu' ? 'selected' : ''; ?>>Pointu</option>
-                                <option value="Passeur" <?php echo ($participation['Poste'] ?? '') == 'Passeur' ? 'selected' : ''; ?>>Passeur</option>
+                                <option value="Attaquant" <?php echo $joueur['Poste'] === 'Attaquant' ? 'selected' : ''; ?>>Attaquant</option>
+                                <option value="Centre avant" <?php echo $joueur['Poste'] === 'Centre avant' ? 'selected' : ''; ?>>Centre avant</option>
+                                <option value="Centre arrière" <?php echo $joueur['Poste'] === 'Centre arrière' ? 'selected' : ''; ?>>Centre arrière</option>
+                                <option value="Réceptionneur" <?php echo $joueur['Poste'] === 'Réceptionneur' ? 'selected' : ''; ?>>Réceptionneur</option>
+                                <option value="Pointu" <?php echo $joueur['Poste'] === 'Pointu' ? 'selected' : ''; ?>>Pointu</option>
+                                <option value="Passeur" <?php echo $joueur['Poste'] === 'Passeur' ? 'selected' : ''; ?>>Passeur</option>
                             </select>
                         </td>
                         <td>
                             <select name="role_<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" required>
-                                <option value="Titulaire" <?php echo ($participation['Titulaire_ou_remplaçant'] ?? '') == 'Titulaire' ? 'selected' : ''; ?>>Titulaire</option>
-                                <option value="Remplaçant" <?php echo ($participation['Titulaire_ou_remplaçant'] ?? '') == 'Remplaçant' ? 'selected' : ''; ?>>Remplaçant</option>
+                                <option value="Titulaire" <?php echo $joueur['Titulaire_ou_remplaçant'] === 'Titulaire' ? 'selected' : ''; ?>>Titulaire</option>
+                                <option value="Remplaçant" <?php echo $joueur['Titulaire_ou_remplaçant'] === 'Remplaçant' ? 'selected' : ''; ?>>Remplaçant</option>
                             </select>
                         </td>
                         <td><?php echo htmlspecialchars($joueur['Nom']); ?></td>
                         <td><?php echo htmlspecialchars($joueur['Prénom']); ?></td>
                         <td><?php echo htmlspecialchars($joueur['Taille']); ?></td>
                         <td><?php echo htmlspecialchars($joueur['Poids']); ?></td>
-                        <td><?php echo htmlspecialchars($joueur['Commentaires']); ?></td>
+                        <td><?php echo htmlspecialchars($joueur['Commentaire']); ?></td>
                         <td><?php echo htmlspecialchars($joueur['Evaluations']); ?></td>
                     </tr>
                 <?php endforeach; ?>
