@@ -1,6 +1,6 @@
 <?php
-// Inclure la connexion à la base de données
-include('../controleur/db_connexion.php');
+// Inclure la fonction pour récupérer les joueurs actifs
+include('../controleur/ControleurRécupererJoueursActifs.php');
 
 // Vérifier si l'ID du match est passé dans l'URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -12,20 +12,9 @@ $id_match = intval($_GET['id']);
 
 // Récupérer les joueurs actifs
 try {
-    $stmt = $pdo->prepare("
-        SELECT j.*, 
-               c.Commentaire, 
-               p.Note AS Evaluations 
-        FROM Joueur j
-        LEFT JOIN Commentaire c ON j.IdJoueur = c.IdJoueur
-        LEFT JOIN Participer p ON p.IdJoueur = j.IdJoueur AND p.IdMatch = :id_match
-        WHERE j.Statut = '0'
-    ");
-    $stmt->bindParam(':id_match', $id_match, PDO::PARAM_INT);
-    $stmt->execute();
-    $joueurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Erreur lors de la récupération des joueurs actifs : " . $e->getMessage();
+    $joueurs = recupererJoueursActifs($pdo, $id_match);
+} catch (Exception $e) {
+    echo $e->getMessage();
     exit;
 }
 
@@ -40,7 +29,7 @@ $nombre_minimum = 12;
     <meta name="description" content="Feuille de match">
     <meta name="author" content="Enzo">
     <title>Feuille de Match</title>
-    <link rel="stylesheet" href="JoueursCSS.css">
+    <!--<link rel="stylesheet" href="JoueursCSS.css">-->
     <script>
         function verifierSelection() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -105,13 +94,13 @@ $nombre_minimum = 12;
                     <tr>
                         <td>
                             <input type="checkbox" name="joueurs[]" value="<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" 
-                                   <?php echo $joueur['Evaluations'] ? 'checked' : ''; ?>>
+                                <?php echo $joueur['Poste'] ? 'checked' : ''; ?>>
                         </td>
                         <td>
                             <select name="poste_<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" required>
                                 <option value="Attaquant" <?php echo $joueur['Poste'] === 'Attaquant' ? 'selected' : ''; ?>>Attaquant</option>
-                                <option value="Centre avant" <?php echo $joueur['Poste'] === 'Centre avant' ? 'selected' : ''; ?>>Centre avant</option>
-                                <option value="Centre arrière" <?php echo $joueur['Poste'] === 'Centre arrière' ? 'selected' : ''; ?>>Centre arrière</option>
+                                <option value="Central avant" <?php echo $joueur['Poste'] === 'Central avant' ? 'selected' : ''; ?>>Central avant</option>
+                                <option value="Central arrière" <?php echo $joueur['Poste'] === 'Central arrière' ? 'selected' : ''; ?>>Central arrière</option>
                                 <option value="Réceptionneur" <?php echo $joueur['Poste'] === 'Réceptionneur' ? 'selected' : ''; ?>>Réceptionneur</option>
                                 <option value="Pointu" <?php echo $joueur['Poste'] === 'Pointu' ? 'selected' : ''; ?>>Pointu</option>
                                 <option value="Passeur" <?php echo $joueur['Poste'] === 'Passeur' ? 'selected' : ''; ?>>Passeur</option>
