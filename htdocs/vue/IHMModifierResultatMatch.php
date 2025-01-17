@@ -60,7 +60,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         </tr>
         <tr>
             <th>Domicile ou Exterieur</th>
-            <td><?php echo htmlspecialchars($match['Domicile']); ?></td>
+            <td><?= htmlspecialchars($match['Domicile'] ? 'Extérieur' : 'Domicile'); ?></td>
         </tr>
         <tr>
             <th>Resultat</th>

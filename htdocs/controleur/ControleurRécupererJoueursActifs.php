@@ -9,8 +9,8 @@ function recupererJoueursActifs($pdo, $id_match) {
             SELECT j.*, 
                    c.Commentaire, 
                    p.Note AS Evaluations, 
-                   p.Poste, 
-                   p.Titulaire_ou_remplaçant 
+                   IFNULL(p.Poste, '--') AS Poste, 
+                   IFNULL(p.Titulaire_ou_remplaçant, '--') AS Titulaire_ou_remplaçant
             FROM Joueur j
             LEFT JOIN Commentaire c ON j.IdJoueur = c.IdJoueur
             LEFT JOIN Participer p ON p.IdJoueur = j.IdJoueur AND p.IdMatch = :id_match

@@ -48,13 +48,10 @@ $nombre_minimum = 12;
                 const poste = document.querySelector(`[name="poste_${idJoueur}"]`).value;
                 const role = document.querySelector(`[name="role_${idJoueur}"]`).value;
 
-                postes[poste] = postes[poste] || [];
-                postes[poste].push(role);
-
-                if (!roles[poste]) {
-                    roles[poste] = { Titulaire: 0, Remplaçant: 0 };
+                if (poste === '--' || role === '--') {
+                    alert(`Le joueur ID ${idJoueur} a un poste ou un rôle invalide ("--").`);
+                    valid = false;
                 }
-                roles[poste][role]++;
             });
 
             for (const poste in postes) {
@@ -94,10 +91,11 @@ $nombre_minimum = 12;
                     <tr>
                         <td>
                             <input type="checkbox" name="joueurs[]" value="<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" 
-                                <?php echo $joueur['Poste'] ? 'checked' : ''; ?>>
+                                <?php echo $joueur['Poste'] !== '--' && $joueur['Titulaire_ou_remplaçant'] !== '--' ? 'checked' : ''; ?>>
                         </td>
                         <td>
                             <select name="poste_<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" required>
+                                <option value="--" <?php echo $joueur['Poste'] === '--' ? 'selected' : ''; ?>>--</option>
                                 <option value="Attaquant" <?php echo $joueur['Poste'] === 'Attaquant' ? 'selected' : ''; ?>>Attaquant</option>
                                 <option value="Central avant" <?php echo $joueur['Poste'] === 'Central avant' ? 'selected' : ''; ?>>Central avant</option>
                                 <option value="Central arrière" <?php echo $joueur['Poste'] === 'Central arrière' ? 'selected' : ''; ?>>Central arrière</option>
@@ -108,6 +106,7 @@ $nombre_minimum = 12;
                         </td>
                         <td>
                             <select name="role_<?php echo htmlspecialchars($joueur['IdJoueur']); ?>" required>
+                                <option value="--" <?php echo $joueur['Titulaire_ou_remplaçant'] === '--' ? 'selected' : ''; ?>>--</option>
                                 <option value="Titulaire" <?php echo $joueur['Titulaire_ou_remplaçant'] === 'Titulaire' ? 'selected' : ''; ?>>Titulaire</option>
                                 <option value="Remplaçant" <?php echo $joueur['Titulaire_ou_remplaçant'] === 'Remplaçant' ? 'selected' : ''; ?>>Remplaçant</option>
                             </select>
