@@ -1,5 +1,12 @@
-<?php include('Menu.php');?>
-<?php include('../controleur/ControleurMatchs.php');?>
+<?php 
+
+include('Menu.php');
+
+include('../controleur/ControleurMatchs.php');
+
+// Inclure la fonction pour formater le score des matchs
+include('../controleur/FormaterScore.php');
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,7 +47,7 @@
                     <td><?= htmlspecialchars($match['Equipe_Adverse']); ?></td>
                     <td><?= htmlspecialchars($match['Lieu_Match']); ?></td>
                     <td><?= htmlspecialchars($match['Domicile'] ? 'Extérieur' : 'Domicile'); ?></td>
-                    <td><?= htmlspecialchars($match['Resultat']); ?></td>
+                    <td><?= formaterScore($match['Resultat']); ?></td>
                     <td>
                         <a href="IHMDetailsMatch.php?id=<?= $match['IdMatch']; ?>">
                             <button>Consulter</button>

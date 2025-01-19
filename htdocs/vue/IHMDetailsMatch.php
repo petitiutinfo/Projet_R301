@@ -5,6 +5,9 @@ include('../controleur/db_connexion.php');
 // Inclure le contrôleur des matchs
 include('../controleur/ControleurMatchs.php');
 
+// Inclure la fonction pour formater le score des matchs
+include('../controleur/FormaterScore.php');
+
 // Vérifier si l'ID du match est passé dans l'URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
@@ -69,7 +72,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         </tr>
         <tr>
             <th>Résultat</th>
-            <td><?= htmlspecialchars($match['Resultat']); ?></td>
+            <td><?= formaterScore($match['Resultat']); ?></td>
         </tr>
     </table>
 </body>

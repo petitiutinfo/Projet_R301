@@ -3,6 +3,7 @@
 include('../controleur/db_connexion.php');
 include('../controleur/ControleurRecupererMatch.php');
 //include('../controleur/ControleurModificationResultatMatch.php');
+include('../controleur/FormaterScore.php');
 
 // Vérifier si l'ID du match est passé dans l'URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -64,15 +65,23 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         </tr>
         <tr>
             <th>Resultat</th>
-            <td><?php echo htmlspecialchars($match['Resultat']); ?></td>
+            <td><?= formaterScore($match['Resultat']); ?></td>
         </tr>
     </table>
 
     <h2>Modifier le Résultat</h2>
     <form method="POST" action="../controleur/ControleurModificationResultatMatch.php" style="display:inline;">
-        <label for="resultat">Nouveau Résultat:</label>
-        <input type="text" id="resultat" name="resultat" required>
         <input type="hidden" name="id" value="<?= $match['IdMatch']; ?>">
+        <label for="resultat">Nouveau Résultat:</label>
+        <select id="resultat" name="resultat" required>
+            <option value="-3" <?= ($match['Resultat'] == -3) ? 'selected' : ''; ?>>0-3</option>
+            <option value="-2" <?= ($match['Resultat'] == -2) ? 'selected' : ''; ?>>1-3</option>
+            <option value="-1" <?= ($match['Resultat'] == -1) ? 'selected' : ''; ?>>2-3</option>
+            <option value="0" <?= ($match['Resultat'] == 0) ? 'selected' : ''; ?>>0-0</option>
+            <option value="1" <?= ($match['Resultat'] == 1) ? 'selected' : ''; ?>>3-2</option>
+            <option value="2" <?= ($match['Resultat'] == 2) ? 'selected' : ''; ?>>3-1</option>
+            <option value="3" <?= ($match['Resultat'] == 3) ? 'selected' : ''; ?>>3-0</option>
+        </select>
         <button type="submit">Mettre à jour</button>
     </form>
 </body>

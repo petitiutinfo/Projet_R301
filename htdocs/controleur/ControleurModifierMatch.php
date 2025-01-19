@@ -12,6 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $domicile = $_POST['Domicile'];
     $resultat = $_POST['resultat'];
 
+    // Récupérer la date et l'heure actuelles
+    $dateActuelle = date("Y-m-d");
+
+    // Vérifier si la date du match est dans le futur
+    if ($dateMatch < $dateActuelle) {
+        echo "<script>
+                alert('Erreur : La date du match ne peut pas être dans le futur.');
+                window.location.href = '../vue/IHMModifierMatch.php?id=$id';
+              </script>";
+        exit;
+    }
+
     try {
         // Requête pour mettre à jour les informations du match
         $stmt = $pdo->prepare("UPDATE Matchs 
