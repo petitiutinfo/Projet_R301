@@ -1,4 +1,6 @@
-/* Code du style commun à toutes les pages */
+/* Style commun à plusieurs pages (menu, body et h1) */
+
+/* Style général du corps de la page */
 
 body {
     font-family: Arial, sans-serif;
@@ -7,26 +9,30 @@ body {
     padding: 0;
 }
 
+/* Style du titre principal */
 h1 {
     color: #020100;
     text-align: center;
     margin: 20px 0;
 }
 
+/* Style de la barre supérieure de la page */
 #hautDePage {
     background-color: #197BBD;
     color: #F0F3F5;
-    padding: 10px 0;
+    padding: 1.5em ;
     position: relative;
 }
 
+/* Style de la section de navigation */
 #navigation {
-    text-align: center;
-    position: relative;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
+/* Style du menu principal */
 #menu {
     list-style-type: none;
     padding: 0;
@@ -35,10 +41,12 @@ h1 {
     gap: 20px;
 }
 
+/* Style des éléments du menu */
 #menu li {
     margin: 0;
 }
 
+/* Style des liens du menu */
 #menu a {
     text-decoration: none;
     color: #F1D302;
@@ -48,24 +56,24 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le lien du menu est survolé */
 #menu a:hover {
-    background-color: #474448;
+    background-color: #0056b3;
 }
 
+/* Style du menu de déconnexion */
 #menuLogout {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
+/* Style des éléments du menu de déconnexion */
 #menuLogout li {
     margin: 0;
 }
 
+/* Style des liens du menu de déconnexion */
 #menuLogout a {
     text-decoration: none;
     color: #F1D302;
@@ -75,10 +83,37 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le lien de déconnexion est survolé */
 #menuLogout a:hover {
-    background-color: #474448;
+    background-color: #0056b3;
 }
 
+/* Style pour l'ID nom */
+#volleyMaster {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style des liens du menu nom */
+#volleyMaster a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+
+/*------------------------------------------------------------------------------*/
+/* Code du style des pages d'ajout et modification des joueurs et des matchs */
+/*------------------------------------------------------------------------------*/
+
+/* Formulaire avec bordure et ombre */
 form {
     background-color: #FFFFFF;
     border: 1px solid #197BBD;
@@ -89,31 +124,33 @@ form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Espacement entre les éléments du formulaire */
 .form-group {
     margin-bottom: 15px;
 }
 
+/* Style des labels des champs du formulaire */
 .labelFormJoueur {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
     color: #020100;
 }
 
 /* Tous les champs de saisie auront la même largeur et seront centrés */
-input, select, #bontonAjoutJoueur {
+input, select{
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #474448;
     border-radius: 5px;
     font-size: 14px;
-    box-sizing: border-box; /* Garantit que le padding ne dépasse pas la largeur */
-    text-align: center; /* Centrer le texte dans les champs de saisie */
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box; 
+    text-align: center; 
 }
 
-/* Boutons de formulaire */
-#boutonAjoutJoueur, #boutonAjoutMatch, #bontonModificationJoueur {
+/* Style des boutons d'ajout et de modification */
+#boutonAjout, #boutonAjoutMatch, #bontonModificationJoueur, #bontonModificationMatch {
     display: block;
     width: 50%;
     margin: 20px auto;
@@ -128,7 +165,8 @@ input, select, #bontonAjoutJoueur {
     text-align: center;
 }
 
+/* Effet visuel lorsque le bouton est survolé */
 button:hover {
-    background-color: #197BBD;
+    background-color: #0056b3;
     color: #F0F3F5;
 }

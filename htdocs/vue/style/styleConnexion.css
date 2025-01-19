@@ -1,0 +1,73 @@
+/*Style de la page de connexion*/
+
+/* Style général du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f3f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Conteneur principal de la page de connexion */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+h1 {
+    color: #197bbd;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Titre du formulaire */
+h2 {
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+/* Formulaire de connexion centré */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style des labels dans le formulaire */
+label {
+    margin-bottom: 10px;
+    color: #333333;
+    align-self: flex-start;
+}
+
+/* Style des champs de saisie (inputs) */
+input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Style du bouton de soumission */
+button {
+    background-color: #197bbd;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Effet visuel lorsque le bouton est survolé */
+button:hover {
+    background-color: #145a8a;
+}

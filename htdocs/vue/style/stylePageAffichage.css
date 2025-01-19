@@ -1,4 +1,6 @@
-/* Code du style commun à toutes les pages */
+/* Style commun à plusieurs pages (menu, body et h1) */
+
+/* Style général du corps de la page */
 
 body {
     font-family: Arial, sans-serif;
@@ -7,26 +9,30 @@ body {
     padding: 0;
 }
 
+/* Style du titre principal */
 h1 {
     color: #020100;
     text-align: center;
     margin: 20px 0;
 }
 
+/* Style de la barre supérieure de la page */
 #hautDePage {
     background-color: #197BBD;
     color: #F0F3F5;
-    padding: 10px 0;
+    padding: 1.5em ;
     position: relative;
 }
 
+/* Style de la section de navigation */
 #navigation {
-    text-align: center;
-    position: relative;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
+/* Style du menu principal */
 #menu {
     list-style-type: none;
     padding: 0;
@@ -35,10 +41,12 @@ h1 {
     gap: 20px;
 }
 
+/* Style des éléments du menu */
 #menu li {
     margin: 0;
 }
 
+/* Style des liens du menu */
 #menu a {
     text-decoration: none;
     color: #F1D302;
@@ -48,24 +56,24 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le lien du menu est survolé */
 #menu a:hover {
-    background-color: #474448;
+    background-color: #0056b3;
 }
 
+/* Style du menu de déconnexion */
 #menuLogout {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
+/* Style des éléments du menu de déconnexion */
 #menuLogout li {
     margin: 0;
 }
 
+/* Style des liens du menu de déconnexion */
 #menuLogout a {
     text-decoration: none;
     color: #F1D302;
@@ -75,29 +83,58 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le lien de déconnexion est survolé */
 #menuLogout a:hover {
-    background-color: #474448;
+    background-color: #0056b3;
 }
 
-/*##################################################*/
+/* Style pour l'ID nom */
+#volleyMaster {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-/*Code du style de la page IHMJoueurs.php */
+/* Style des liens du menu nom */
+#volleyMaster a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
-/*##################################################*/
 
+
+
+
+
+
+/*-----------------------------------------------------*/
+/* Code du style des pages affichage (IHMJoueurs.php et IHMMatchs.php */
+/*-----------------------------------------------------*/
+
+
+/* Style global du tableau */
 table {
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
+    border: none;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+/* Style des cellules d'en-tête et de données */
 th, td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border: none;
 }
 
+/* Style des en-têtes du tableau */
 th {
     background-color: #197BBD;
     color: #fff;
@@ -105,15 +142,19 @@ th {
     text-transform: uppercase;
 }
 
+/* Style des lignes paires du tableau */
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+/* Effet visuel lorsque la ligne est survolée */
 tr:hover {
     background-color: #f1f1f1;
 }
 
+/* Style des boutons dans les cellules */
 td button {
+    display: inline-block;
     background-color: #197BBD;
     color: #fff;
     border: none;
@@ -123,24 +164,28 @@ td button {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le bouton est survolé */
 td button:hover {
     background-color: #0056b3;
 }
 
+/* Style spécifique pour les boutons de suppression */
 .delete-button {
     background-color: #CD4631;
 }
 
+/* Effet visuel lorsque le bouton de suppression est survolé */
 .delete-button:hover {
     background-color: #c9302c;
 }
 
+/* Style du bouton d'ajout */
 #BoutonAjouter button {
     display: block;
     width: max-content;
     margin: 20px auto;
     background-color: #197BBD;
-    color:#F0F3F5;
+    color: #F0F3F5;
     text-align: center;
     text-decoration: none;
     padding: 10px 20px;
@@ -150,6 +195,8 @@ td button:hover {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le bouton d'ajout est survolé */
 #BoutonAjouter button:hover {
-    background-color: #197BBD;
+    text-decoration: none;
+    background-color: #0056b3;
 }

@@ -1,4 +1,6 @@
-/* Code du style commun à toutes les pages */
+/* Style commun à plusieurs pages (menu, body et h1) */
+
+/* Style général du corps de la page */
 
 body {
     font-family: Arial, sans-serif;
@@ -7,26 +9,30 @@ body {
     padding: 0;
 }
 
+/* Style du titre principal */
 h1 {
     color: #020100;
     text-align: center;
     margin: 20px 0;
 }
 
+/* Style de la barre supérieure de la page */
 #hautDePage {
     background-color: #197BBD;
     color: #F0F3F5;
-    padding: 10px 0;
+    padding: 1.5em ;
     position: relative;
 }
 
+/* Style de la section de navigation */
 #navigation {
-    text-align: center;
-    position: relative;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
+/* Style du menu principal */
 #menu {
     list-style-type: none;
     padding: 0;
@@ -35,10 +41,12 @@ h1 {
     gap: 20px;
 }
 
+/* Style des éléments du menu */
 #menu li {
     margin: 0;
 }
 
+/* Style des liens du menu */
 #menu a {
     text-decoration: none;
     color: #F1D302;
@@ -48,24 +56,24 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le lien du menu est survolé */
 #menu a:hover {
-    background-color: #474448;
+    background-color: #0056b3;
 }
 
+/* Style du menu de déconnexion */
 #menuLogout {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
+/* Style des éléments du menu de déconnexion */
 #menuLogout li {
     margin: 0;
 }
 
+/* Style des liens du menu de déconnexion */
 #menuLogout a {
     text-decoration: none;
     color: #F1D302;
@@ -75,24 +83,50 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Effet visuel lorsque le lien de déconnexion est survolé */
 #menuLogout a:hover {
-    background-color: #474448;
+    background-color: #0056b3;
+}
+
+/* Style pour l'ID nom */
+#volleyMaster {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style des liens du menu nom */
+#volleyMaster a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 
-/* Table des statistiques */
 
 
+
+
+/*-----------------------------------------------------*/
+/* Code du style de la page statistiques */
+/*-----------------------------------------------------*/
+
+/* Titre des sections */
 h2 {
     font-size: 24px;
+    text-align: center;
+    margin-top: 1em;
 }
 
-/* Style pour les listes */
+/* Style pour les listes de statistiques générales */
 #statsGénérales {
     list-style-type: none;
     padding: 0;
     margin: 20px auto;
-    width: 60%;
+    width: 40%;
     background-color: #FFFFFF;
     border: 1px solid #197BBD;
     border-radius: 10px;
@@ -100,14 +134,22 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Style pour les éléments de la liste */
 #statsGénérales li {
     margin: 10px 0;
     font-size: 18px;
 }
 
+/* Classe pour les éléments affichés sur la même ligne */
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /* Style de la table */
 table {
-    width: 80%;
+    width: 60%;
     margin: 20px auto;
     border-collapse: collapse;
     background-color: #FFFFFF;
@@ -117,25 +159,30 @@ table {
     overflow: hidden;
 }
 
+/* Style de l'en-tête de la table */
 table thead {
     background-color: #197BBD;
     color: #F0F3F5;
 }
 
+/* Style des cellules de la table */
 table th, table td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #E0E0E0;
 }
 
+/* Taille de la police pour les en-têtes de colonnes */
 table th {
     font-size: 16px;
 }
 
+/* Couleur de fond des lignes paires */
 table tbody tr:nth-child(even) {
     background-color: #F9F9F9;
 }
 
+/* Couleur de fond au survol des lignes */
 table tbody tr:hover {
-    background-color: #E0F7FA;
+    background-color: #F0F3F5 ;
 }

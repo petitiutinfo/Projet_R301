@@ -1,0 +1,254 @@
+/* Style commun à plusieurs pages (menu, body et h1) */
+
+/* Style général du corps de la page */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F3F5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style du titre principal */
+h1 {
+    color: #020100;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Style de la barre supérieure de la page */
+#hautDePage {
+    background-color: #197BBD;
+    color: #F0F3F5;
+    padding: 1.5em ;
+    position: relative;
+}
+
+/* Style de la section de navigation */
+#navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Style du menu principal */
+#menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    gap: 20px;
+}
+
+/* Style des éléments du menu */
+#menu li {
+    margin: 0;
+}
+
+/* Style des liens du menu */
+#menu a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet visuel lorsque le lien du menu est survolé */
+#menu a:hover {
+    background-color: #0056b3;
+}
+
+/* Style du menu de déconnexion */
+#menuLogout {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style des éléments du menu de déconnexion */
+#menuLogout li {
+    margin: 0;
+}
+
+/* Style des liens du menu de déconnexion */
+#menuLogout a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet visuel lorsque le lien de déconnexion est survolé */
+#menuLogout a:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour l'ID nom */
+#volleyMaster {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style des liens du menu nom */
+#volleyMaster a {
+    text-decoration: none;
+    color: #F1D302;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+
+/*-----------------------------------------------------*/
+/* Code du style de la page de modification du resultat des matchs */
+/*-----------------------------------------------------*/
+
+
+/* Style du tableau */
+table {
+    width: 60%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Style des cellules du tableau */
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+/* Style des entêtes du tableau */
+th {
+    background-color: #197BBD;
+    color: #fff;
+    text-transform: uppercase;
+    width: 40%;
+}
+
+/* Style des données des cellules */
+td {
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    width: 60%; 
+}
+
+/* Style de la première colonne du tableau */
+td:first-child {
+    background-color: #197BBD;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 30%; 
+}
+
+/* Style de la dernière ligne du tableau */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Style des lignes paires du tableau */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Effet visuel au survol des lignes du tableau */
+tr:hover td {
+    background-color: #f1f1f1;
+}
+h2{
+    text-align: center;
+    margin-top: 20px;
+    color: #020100;
+}
+
+/* Style du formulaire de modification du résultat */
+.formulaireModificationResultat {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #F0F3F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Centrer le formulaire et réduire sa largeur */
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Centrer les labels et les champs */
+form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #020100;
+    text-align: center;
+}
+
+/* Ajuster la largeur du champ de sélection */
+form select {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #DADADA;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Effet focus pour le champ de sélection */
+form select:focus {
+    border-color: #197BBD;
+    outline: none;
+}
+
+/* Style du bouton */
+form button {
+    width: 80%;
+    padding: 10px;
+    background-color: #197BBD;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 20px;
+}
+
+/* Effet de hover pour le bouton */
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Effet de clic pour le bouton */
+form button:active {
+    transform: scale(0.98);
+}

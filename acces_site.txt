@@ -1,0 +1,20 @@
+Accès à notre site :
+
+Page de connexion : http://volleymaster.infinityfreeapp.com/index.php
+
+Nom d'utilisateur : coach
+Mot de passe : $iutinfo
+
+
+Informations utiles ou remarques :
+
+Composition d'une équipe de volley : 12 joueurs répartis dans 6 postes pendant la parties. Pour chaque poste il y a 1 titulaire et 1 remplaçant.
+
+Le score et le résultat : Un match se joue en 'set' et s'arrête lorsqu'une des équipe a gagnée 3 sets. Le résultat est donc noté sous la forme 'X-X', avec le X de gauche pour à l'équipe de l'utilisateur et le X de droite pour l'équipe adverse. Un des X égal à 3 sauf en cas de matchs nul (si jamais l'utilisateur doit renseigner le match comme nul il peut choisir l'option '0-0').
+
+Formats pour modifications/ajout de matchs ou joueurs :
+Des heures : HH:MM
+Des dates : JJ:MM:AAAA
+
+Lien vers notre Git :
+https://github.com/petitiutinfo/Projet_R301

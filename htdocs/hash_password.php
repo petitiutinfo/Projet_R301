@@ -1,5 +1,5 @@
 <?php
-include('../controleur/db_connexion.php');  // Assure-toi que ce fichier contient la connexion à la base de données
+include('/controleur/db_connexion.php');  // Assure-toi que ce fichier contient la connexion à la base de données
 
 try {
     // Récupérer tous les utilisateurs avec leurs mots de passe
